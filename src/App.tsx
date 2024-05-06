@@ -1,18 +1,12 @@
+import type { ReactElement } from 'react';
 import React from 'react';
 
-function App() {
-  return (
-    <div>
-      <header>
-        <p>NORD SECURITY | Recuritment task</p>
-        <nav>
-          <li>
-            <a href="">/login</a>
-          </li>
-        </nav>
-      </header>
-    </div>
-  );
-}
+import Login from './components/atoms/test';
+
+const App = (): ReactElement => (
+  <div>
+    <Login />
+  </div>
+);
 
 export default App;

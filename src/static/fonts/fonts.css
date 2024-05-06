@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Cairo';
+    src: url("Cairo-Bold.woff2") format("woff2"), url("Cairo-Bold.ttf") format("ttf");
+    font-weight: bold;
+    font-style: normal;
+    unicode-range: U+0020-00FE;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cairo';
+    src: url("Cairo-Medium.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    unicode-range: U+0020-00FE;
+    font-display: swap;
+}

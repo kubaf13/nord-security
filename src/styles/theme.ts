@@ -19,8 +19,7 @@ const theme: Theme = {
     maxWidth: `${breakpoints.maxWidth}px`,
   },
   fonts: {
-    loveYaLikeASister: 'Love Ya Like A Sister',
-    jetBrainsFont: 'JetBrains',
+    cairo: 'Cairo',
   },
 };
 

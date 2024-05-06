@@ -17,7 +17,6 @@ export interface Theme {
     [key in ViewportName]: string;
   };
   fonts: {
-    loveYaLikeASister: string;
-    jetBrainsFont: string;
+    cairo: string;
   };
 }
