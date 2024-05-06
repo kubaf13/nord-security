@@ -9,7 +9,11 @@ export const breakpoints = {
 
 const theme: Theme = {
   palette: {
-    text: '#FFF',
+    background: '#F2F2F2',
+    accent: '#425A7D',
+    span: '#4F4F4F',
+    text: '#000000',
+    error: '#EA3838',
   },
 
   media: {

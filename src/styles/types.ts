@@ -8,7 +8,11 @@ declare module 'styled-components' {
 export type ViewportName = 'desktop' | 'tablet' | 'mobile' | 'maxWidth';
 
 export type Palette = {
+  background: string;
+  accent: string;
+  span: string;
   text: string;
+  error: string;
 };
 
 export interface Theme {
