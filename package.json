@@ -37,7 +37,8 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.1",
-    "prettier": "^3.2.4"
+    "prettier": "^3.2.4",
+    "tsconfig-paths-webpack-plugin": "^4.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
