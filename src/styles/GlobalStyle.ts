@@ -16,16 +16,13 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     }
     
     button {
+        background: none;
+        border: none;
         outline: 0;
-        padding: 5px 20px 5px;
         cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
-
-        @media ${({ theme }) => theme.media.tablet} {
-            padding: 13px 50px 13px;
-        }
     }
 `;
 
