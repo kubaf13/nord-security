@@ -9,6 +9,7 @@ export interface ButtonProps {
   ariaLabel: string;
   onClick?: () => void;
   variant: STYLING_VARIANT;
+  type?: string;
 }
 
 export type Button = (props: ButtonProps) => ReactElement;

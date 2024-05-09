@@ -20,13 +20,8 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: '[name].[ext]',
-          outputPath: 'src/static/images/',
-        },
+        test: /\.(png|jpe?g|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },

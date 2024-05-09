@@ -12,8 +12,8 @@ export const getVariant = (variant: STYLING_VARIANT) => {
         color: ${({ theme }) => theme.palette.background};
         position: relative;
         background-color: rgba(0, 0, 0, 0);
-        width: 80%;
-
+        padding: 5px 30px;
+        z-index: 10;
         &:after {
           content: '';
           background-color: ${({ theme }) => theme.palette.accent};
@@ -37,6 +37,7 @@ export const getVariant = (variant: STYLING_VARIANT) => {
       return css`
         font-size: 16px;
         text-decoration: none;
+        color: ${({ theme }) => theme.palette.text};
       `;
     default:
       return;
