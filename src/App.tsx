@@ -7,8 +7,8 @@ import PrivateRoute from './components/molecules/PrivateRoute';
 import { PublicRoute } from './components/molecules/PublicRoute';
 import Layout from './components/organisms/Layout/Layout';
 import { Home } from './components/templates/Homepage/Homepage';
-import { List } from './components/templates/ListTemplate';
-import { Login } from './components/templates/Login';
+import List from './components/templates/ListTemplate';
+import Login from './components/templates/Login';
 import { AppContextProvider } from './contexts/AppContext';
 import { AuthProvider } from './contexts/AuthContext';
 
@@ -31,5 +31,4 @@ const App = (): ReactElement => (
     </AppContextProvider>
   </BrowserRouter>
 );
-
 export default App;
