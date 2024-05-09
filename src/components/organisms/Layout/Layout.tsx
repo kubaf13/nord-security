@@ -20,12 +20,16 @@ const Navigation = (): ReactElement => {
       <Link to="/" style={{ margin: '0 10px', color: 'white' }}>
         Home
       </Link>
-      <Link to="/login" style={{ margin: '0 10px', color: 'white' }}>
-        Login
-      </Link>
-      <Link to="/list" style={{ margin: '0 10px', color: 'white' }}>
-        List
-      </Link>
+      {!isAuthenticated && (
+        <Link to="/login" style={{ margin: '0 10px', color: 'white' }}>
+          Login
+        </Link>
+      )}
+      {isAuthenticated && (
+        <Link to="/list" style={{ margin: '0 10px', color: 'white' }}>
+          List
+        </Link>
+      )}
       {isAuthenticated && <button onClick={logout}>Log Out</button>}
     </NavContainer>
   );
