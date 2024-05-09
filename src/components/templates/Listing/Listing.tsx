@@ -4,7 +4,15 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { useAuth } from '../../../contexts/AuthContext';
 import type { CardProps } from '../../atoms/Card/Card.types';
-import { CustomSelect, ListingContainer, SortWrapper } from './Listing.styled';
+import {
+  CustomSelect,
+  LeftArrow,
+  ListingContainer,
+  Page,
+  Pagination,
+  RightArrow,
+  SortWrapper,
+} from './Listing.styled';
 import type { Listing as ListingType } from './Listing.types';
 import type { FiltrationType } from './Listing.types';
 
@@ -12,6 +20,10 @@ const Listing: ListingType = () => {
   const [items, setItems] = useState<CardProps[]>([]);
   const [sortType, setSortType] = useState<FiltrationType>('random');
   const { token } = useAuth();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const pageCount = Math.ceil(items.length / itemsPerPage);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -62,7 +74,7 @@ const Listing: ListingType = () => {
 
     setTimeout(() => {
       setItems(sortedItems);
-    }, 300);
+    }, 250);
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -72,9 +84,14 @@ const Listing: ListingType = () => {
     sortItems(items, newSortArray);
   };
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <ListingContainer>
       <h1>List of Items</h1>
+      <span>TOTAL: {items.length}</span>
       <SortWrapper>
         <span>SORT BY:</span>
         <CustomSelect value={sortType} onChange={handleSortChange}>
@@ -86,7 +103,7 @@ const Listing: ListingType = () => {
         </CustomSelect>
       </SortWrapper>
       <TransitionGroup component="ul">
-        {items.map((item, index) => (
+        {currentItems.map((item, index) => (
           <CSSTransition key={index} timeout={500} classNames="item">
             <li>
               {item.name} - {item.distance} km
@@ -94,6 +111,31 @@ const Listing: ListingType = () => {
           </CSSTransition>
         ))}
       </TransitionGroup>
+      <Pagination>
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          <LeftArrow />
+        </button>
+        {Array.from({ length: pageCount }, (_, i) => (
+          <Page
+            key={i}
+            onClick={() => setCurrentPage(i + 1)}
+            style={{
+              fontWeight: currentPage === i + 1 ? 'bold' : 'normal',
+            }}
+          >
+            {i + 1}
+          </Page>
+        ))}
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage === pageCount}
+        >
+          <RightArrow />
+        </button>
+      </Pagination>
     </ListingContainer>
   );
 };
