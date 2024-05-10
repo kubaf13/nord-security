@@ -3,26 +3,31 @@ import React, { useEffect, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { useAuth } from '../../../contexts/AuthContext';
+import { STYLING_VARIANT } from '../../atoms/Button/Button.types';
+import { Card } from '../../atoms/Card/Card';
 import type { CardProps } from '../../atoms/Card/Card.types';
+import Link from '../../atoms/Link';
 import {
   CustomSelect,
   LeftArrow,
   ListingContainer,
+  ListingHeader,
   Page,
   Pagination,
   RightArrow,
   SortWrapper,
+  Template,
+  WelcomeContainer,
 } from './Listing.styled';
-import type { Listing as ListingType } from './Listing.types';
-import type { FiltrationType } from './Listing.types';
+import type { FiltrationType, Listing as ListingType } from './Listing.types';
 
 const Listing: ListingType = () => {
   const [items, setItems] = useState<CardProps[]>([]);
   const [sortType, setSortType] = useState<FiltrationType>('random');
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const { token } = useAuth();
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
 
+  const itemsPerPage = 12;
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
   useEffect(() => {
@@ -89,54 +94,65 @@ const Listing: ListingType = () => {
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <ListingContainer>
-      <h1>List of Items</h1>
-      <span>TOTAL: {items.length}</span>
-      <SortWrapper>
-        <span>SORT BY:</span>
-        <CustomSelect value={sortType} onChange={handleSortChange}>
-          <option value="random">Random</option>
-          <option value="name-asc">Sort Name A-Z</option>
-          <option value="name-desc">Sort Name Z-A</option>
-          <option value="distance-asc">Sort Distance Ascending</option>
-          <option value="distance-desc">Sort Distance Descending</option>
-        </CustomSelect>
-      </SortWrapper>
-      <TransitionGroup component="ul">
-        {currentItems.map((item, index) => (
-          <CSSTransition key={index} timeout={500} classNames="item">
-            <li>
-              {item.name} - {item.distance} km
-            </li>
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
-      <Pagination>
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          <LeftArrow />
-        </button>
-        {Array.from({ length: pageCount }, (_, i) => (
-          <Page
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            style={{
-              fontWeight: currentPage === i + 1 ? 'bold' : 'normal',
-            }}
+    <Template>
+      <WelcomeContainer>
+        <span>profile page</span>
+        <h2>Welcome in your profile, friend!</h2>
+      </WelcomeContainer>
+      <Link
+        variant={STYLING_VARIANT.SIMPLE}
+        label="go to homepage"
+        ariaLabel="go to homepage"
+        url="/"
+      />
+      <ListingContainer>
+        <ListingHeader>
+          <span>TOTAL: {items.length}</span>
+          <SortWrapper>
+            <span>sort by:</span>
+            <CustomSelect value={sortType} onChange={handleSortChange}>
+              <option value="random">Random</option>
+              <option value="name-asc">Sort Name A-Z</option>
+              <option value="name-desc">Sort Name Z-A</option>
+              <option value="distance-asc">Sort Distance Ascending</option>
+              <option value="distance-desc">Sort Distance Descending</option>
+            </CustomSelect>
+          </SortWrapper>
+        </ListingHeader>
+        <TransitionGroup component="ul">
+          {currentItems.map((item, index) => (
+            <CSSTransition key={index} timeout={500} classNames="item">
+              <Card name={item.name} distance={item.distance} />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+        <Pagination>
+          <button
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
           >
-            {i + 1}
-          </Page>
-        ))}
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === pageCount}
-        >
-          <RightArrow />
-        </button>
-      </Pagination>
-    </ListingContainer>
+            <LeftArrow />
+          </button>
+          {Array.from({ length: pageCount }, (_, i) => (
+            <Page
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              style={{
+                fontWeight: currentPage === i + 1 ? 'bold' : 'normal',
+              }}
+            >
+              {i + 1}
+            </Page>
+          ))}
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === pageCount}
+          >
+            <RightArrow />
+          </button>
+        </Pagination>
+      </ListingContainer>
+    </Template>
   );
 };
 export default Listing;
