@@ -4,9 +4,9 @@ import { Route, Routes, useLocation } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
-import PrivateRoute from './components/molecules/PrivateRoute';
-import { PublicRoute } from './components/molecules/PublicRoute';
-import Layout from './components/organisms/Layout/Layout';
+import PrivateRoute from './components/molecules/Routes/PrivateRoute';
+import { PublicRoute } from './components/molecules/Routes/PublicRoute';
+import Layout from './components/organisms/Layout';
 import { Home } from './components/templates/Homepage/Homepage';
 import { homepageMocks } from './components/templates/Homepage/Homepage.mocks';
 import Listing from './components/templates/Listing/Listing';
@@ -15,7 +15,7 @@ import { AppContextProvider } from './contexts/AppContext';
 import { AuthProvider } from './contexts/AuthContext';
 
 const AnimatedRoutes = () => {
-  const location = useLocation(); // Hook do śledzenia lokalizacji
+  const location = useLocation();
 
   return (
     <SwitchTransition mode="out-in">

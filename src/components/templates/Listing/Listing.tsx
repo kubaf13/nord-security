@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { useAuth } from '../../../contexts/AuthContext';
@@ -94,65 +95,74 @@ const Listing: ListingType = () => {
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <Template>
-      <WelcomeContainer>
-        <span>profile page</span>
-        <h2>Welcome in your profile, friend!</h2>
-      </WelcomeContainer>
-      <Link
-        variant={STYLING_VARIANT.SIMPLE}
-        label="go to homepage"
-        ariaLabel="go to homepage"
-        url="/"
-      />
-      <ListingContainer>
-        <ListingHeader>
-          <span>TOTAL: {items.length}</span>
-          <SortWrapper>
-            <span>sort by:</span>
-            <CustomSelect value={sortType} onChange={handleSortChange}>
-              <option value="random">Random</option>
-              <option value="name-asc">Sort Name A-Z</option>
-              <option value="name-desc">Sort Name Z-A</option>
-              <option value="distance-asc">Sort Distance Ascending</option>
-              <option value="distance-desc">Sort Distance Descending</option>
-            </CustomSelect>
-          </SortWrapper>
-        </ListingHeader>
-        <TransitionGroup component="ul">
-          {currentItems.map((item, index) => (
-            <CSSTransition key={index} timeout={500} classNames="item">
-              <Card name={item.name} distance={item.distance} />
-            </CSSTransition>
-          ))}
-        </TransitionGroup>
-        <Pagination>
-          <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            <LeftArrow />
-          </button>
-          {Array.from({ length: pageCount }, (_, i) => (
-            <Page
-              key={i}
-              onClick={() => setCurrentPage(i + 1)}
-              style={{
-                fontWeight: currentPage === i + 1 ? 'bold' : 'normal',
-              }}
+    <>
+      <Helmet>
+        <title>Listing Page | Recruitment Task by Jakub Flis</title>
+        <meta
+          name="description"
+          content="Recruitment task focused on API communication and validation skills. Ideal for candidates proficient in integrating and validating diverse APIs with robust error handling and security protocols. Join us to demonstrate your ability to streamline data exchange and enhance system reliability."
+        />
+      </Helmet>
+      <Template>
+        <WelcomeContainer>
+          <span>profile page</span>
+          <h2>Welcome in your profile, friend!</h2>
+        </WelcomeContainer>
+        <Link
+          variant={STYLING_VARIANT.SIMPLE}
+          label="go to homepage"
+          ariaLabel="go to homepage"
+          url="/"
+        />
+        <ListingContainer>
+          <ListingHeader>
+            <span>TOTAL: {items.length}</span>
+            <SortWrapper>
+              <span>sort by:</span>
+              <CustomSelect value={sortType} onChange={handleSortChange}>
+                <option value="random">Random</option>
+                <option value="name-asc">Sort Name A-Z</option>
+                <option value="name-desc">Sort Name Z-A</option>
+                <option value="distance-asc">Sort Distance Ascending</option>
+                <option value="distance-desc">Sort Distance Descending</option>
+              </CustomSelect>
+            </SortWrapper>
+          </ListingHeader>
+          <TransitionGroup component="ul">
+            {currentItems.map((item, index) => (
+              <CSSTransition key={index} timeout={500} classNames="item">
+                <Card name={item.name} distance={item.distance} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+          <Pagination>
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
             >
-              {i + 1}
-            </Page>
-          ))}
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === pageCount}
-          >
-            <RightArrow />
-          </button>
-        </Pagination>
-      </ListingContainer>
-    </Template>
+              <LeftArrow />
+            </button>
+            {Array.from({ length: pageCount }, (_, i) => (
+              <Page
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                style={{
+                  fontWeight: currentPage === i + 1 ? 'bold' : 'normal',
+                }}
+              >
+                {i + 1}
+              </Page>
+            ))}
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === pageCount}
+            >
+              <RightArrow />
+            </button>
+          </Pagination>
+        </ListingContainer>
+      </Template>
+    </>
   );
 };
 export default Listing;

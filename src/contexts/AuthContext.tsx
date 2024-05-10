@@ -1,3 +1,4 @@
+//ts-ignore
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import React, { createContext, useContext, useState } from 'react';

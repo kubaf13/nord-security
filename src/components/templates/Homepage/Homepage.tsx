@@ -1,8 +1,10 @@
+import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import Link from '../../atoms/Link';
 import { Container, Title } from './Homepage.styled';
 import type { Homepage as HomepageType } from './Homepage.types';
+
 export const Home: HomepageType = ({ link, text, heading }) => (
   <>
     <Helmet>

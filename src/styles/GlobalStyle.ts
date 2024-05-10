@@ -11,12 +11,6 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
         font-weight: 400;
     }
     
-    
-    
-    main {
-        //background: #F2F2F2;
-    }
-    
     h2 {
         font-size: 40px;
         font-weight: bold;

@@ -5,7 +5,7 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100dvh - 75px);
+  height: calc(100dvh - 90px);
 
   p {
     margin: 10px 0 20px;

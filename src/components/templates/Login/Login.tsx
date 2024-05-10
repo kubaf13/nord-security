@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import type { ReactElement } from 'react';
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -62,47 +63,59 @@ const Login = (): ReactElement => {
   };
 
   return (
-    <LoginTemplate>
-      <MessageWrapper>
-        <h2>Please</h2>
-        <p>type your data</p>
-      </MessageWrapper>
-      <LoginForm onSubmit={handleSubmit(onSubmit)}>
-        <ErrorMessage className={errorVisible ? 'active' : ''}>
-          {loginError}
-        </ErrorMessage>
-        <InputContainer>
-          <StyledLabel htmlFor="username">Username:</StyledLabel>
-          <StyledInput
-            id="username"
-            {...register('username')}
-            placeholder="type username..."
-          />
-          {errors.username && <Tooltip>{errors.username.message}</Tooltip>}
-        </InputContainer>
-        <InputContainer>
-          <StyledLabel htmlFor="password">Password:</StyledLabel>
-          <StyledInput
-            id="password"
-            type={showPassword ? 'text' : 'password'}
-            {...register('password')}
-            placeholder="type password..."
-          />
-          <button type="button" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? <EyeCrossIcon /> : <EyeOpenIcon />}
-          </button>
-          {errors.password && <Tooltip>{errors.password.message}</Tooltip>}
-        </InputContainer>
-        <div>
-          <Button
-            variant={STYLING_VARIANT.BUTTON}
-            label="Log In"
-            type="submit"
-            ariaLabel="Log in to your account"
-          />
-        </div>
-      </LoginForm>
-    </LoginTemplate>
+    <>
+      <Helmet>
+        <title>Login Page | Recruitment Task by Jakub Flis</title>
+        <meta
+          name="description"
+          content="Recruitment task focused on API communication and validation skills. Ideal for candidates proficient in integrating and validating diverse APIs with robust error handling and security protocols. Join us to demonstrate your ability to streamline data exchange and enhance system reliability."
+        />
+      </Helmet>
+      <LoginTemplate>
+        <MessageWrapper>
+          <h2>Please</h2>
+          <p>type your data</p>
+        </MessageWrapper>
+        <LoginForm onSubmit={handleSubmit(onSubmit)}>
+          <ErrorMessage className={errorVisible ? 'active' : ''}>
+            {loginError}
+          </ErrorMessage>
+          <InputContainer>
+            <StyledLabel htmlFor="username">Username:</StyledLabel>
+            <StyledInput
+              id="username"
+              {...register('username')}
+              placeholder="type username..."
+            />
+            {errors.username && <Tooltip>{errors.username.message}</Tooltip>}
+          </InputContainer>
+          <InputContainer>
+            <StyledLabel htmlFor="password">Password:</StyledLabel>
+            <StyledInput
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              {...register('password')}
+              placeholder="type password..."
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeCrossIcon /> : <EyeOpenIcon />}
+            </button>
+            {errors.password && <Tooltip>{errors.password.message}</Tooltip>}
+          </InputContainer>
+          <div>
+            <Button
+              variant={STYLING_VARIANT.BUTTON}
+              label="Log In"
+              type="submit"
+              ariaLabel="Log in to your account"
+            />
+          </div>
+        </LoginForm>
+      </LoginTemplate>
+    </>
   );
 };
 

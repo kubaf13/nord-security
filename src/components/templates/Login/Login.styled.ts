@@ -6,6 +6,7 @@ export const LoginTemplate = styled.section`
   width: 90vw;
   max-width: 500px;
   margin: 0 auto;
+  height: calc(100dvh - 90px);
 `;
 
 export const MessageWrapper = styled.div`
